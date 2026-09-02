@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تمرین | Career Football</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="header">
+
+        <div class="logo">
+            ⚽ CAREER FOOTBALL
+        </div>
+
+        <div class="season">
+            تمرین بازیکن
+        </div>
+
+    </header>
+
+
+    <main class="career-page">
+
+        <!-- عنوان -->
+
+        <div class="page-title">
+
+            <span class="badge">
+                PLAYER TRAINING
+            </span>
+
+            <h1>
+                🏋️ مرکز تمرین
+            </h1>
+
+            <p>
+                تمرین کن، مهارت‌هایت را افزایش بده و Overall خودت را بالا ببر.
+            </p>
+
+        </div>
+
+
+        <!-- کارت بازیکن -->
+
+        <section class="player-header">
+
+            <div class="player-avatar">
+                ⚽
+            </div>
+
+            <div class="player-info">
+
+                <span class="badge">
+                    PLAYER
+                </span>
+
+                <h1 id="playerName">
+                    بازیکن
+                </h1>
+
+                <p id="playerDetails">
+                    اطلاعات بازیکن
+                </p>
+
+            </div>
+
+            <div class="overall-box">
+
+                <span>OVR</span>
+
+                <strong id="playerOverall">
+                    65
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- انرژی -->
+
+        <section class="fan-card">
+
+            <div>
+
+                <span>
+                    🔋 انرژی تمرین
+                </span>
+
+                <h2 id="energy">
+                    100%
+                </h2>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    id="energyProgress"
+                    class="progress-bar"
+                    style="width:100%;"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- تمرین‌ها -->
+
+        <section class="section">
+
+            <div class="section-title">
+                <h2>🎯 انتخاب نوع تمرین</h2>
+            </div>
+
+
+            <div class="career-menu">
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('pace')"
+                >
+                    ⚡ سرعت
+                    <br>
+                    <small>افزایش Pace</small>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('shooting')"
+                >
+                    🎯 شوت
+                    <br>
+                    <small>افزایش Shooting</small>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('passing')"
+                >
+                    🅰️ پاس
+                    <br>
+                    <small>افزایش Passing</small>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('dribbling')"
+                >
+                    🕺 دریبل
+                    <br>
+                    <small>افزایش Dribbling</small>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('defending')"
+                >
+                    🛡️ دفاع
+                    <br>
+                    <small>افزایش Defending</small>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="trainPlayer('physical')"
+                >
+                    💪 قدرت بدنی
+                    <br>
+                    <small>افزایش Physical</small>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- پیام تمرین -->
+
+        <section
+            class="fan-card"
+            id="trainingResult"
+            style="display:none;"
+        >
+          <span>
+                    📈 نتیجه تمرین
+                </span>
+
+                <h2 id="trainingMessage">
+                    ---
+                </h2>
+
+            </div>
+
+        </section>
+
+
+        <!-- بازگشت -->
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                onclick="window.location.href='career.html'"
+            >
+                ↩️ بازگشت به Career
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        Career Football © 2026
+    </footer>
+
+</div>
+
+
+<script src="training.js"></script>
+
+</body>
+
+</html>
+
+            <div>
