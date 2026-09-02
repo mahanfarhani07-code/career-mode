@@ -1,36 +1,231 @@
-<button>
-                    🏋️ تمرین
-                </button>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-                <button>
-                    🔄 نقل‌وانتقالات
-                </button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                <button>
-                    🏆 جام‌ها
-                </button>
+    <title>Career | Career Football</title>
 
-                <button>
-                    📰 اخبار
-                </button>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-                <button>
-                    📋 قرارداد
-                </button>
+<body>
 
-            </section>
+<div class="app">
 
-        </main>
+    <header class="header">
 
+        <div class="logo">
+            ⚽ CAREER FOOTBALL
+        </div>
 
-        <footer>
-            Career Football © 2026
-        </footer>
+        <div class="season">
+            فصل 2026/27
+        </div>
 
-    </div>
+    </header>
 
 
-    <script src="career.js"></script>
+    <main class="career-page">
+
+        <!-- اطلاعات بازیکن -->
+
+        <section class="player-header">
+
+            <div class="player-avatar">
+                ⚽
+            </div>
+
+            <div class="player-info">
+
+                <span class="badge">
+                    PLAYER CAREER
+                </span>
+
+                <h1 id="playerName">
+                    بازیکن
+                </h1>
+
+                <p id="playerDetails">
+                    اطلاعات بازیکن
+                </p>
+
+            </div>
+
+            <div class="overall-box">
+
+                <span>OVR</span>
+
+                <strong id="playerOverall">
+                    65
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- اطلاعات اصلی -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <span>🏟️</span>
+                <small>باشگاه</small>
+                <strong id="playerClub">---</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>💰</span>
+                <small>ارزش بازیکن</small>
+                <strong id="playerValue">---</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>💵</span>
+                <small>حقوق هفتگی</small>
+                <strong id="playerSalary">---</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>🎂</span>
+                <small>سن</small>
+                <strong id="playerAge">---</strong>
+            </div>
+
+        </section>
+
+
+        <!-- آمار فصل -->
+
+        <section class="section">
+
+            <div class="section-title">
+                <h2>📊 آمار فصل</h2>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>⚽</span>
+                    <small>گل</small>
+                    <strong id="playerGoals">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>🎯</span>
+                    <small>پاس گل</small>
+                    <strong id="playerAssists">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>🏃</span>
+                    <small>بازی</small>
+                    <strong id="playerAppearances">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>🏆</span>
+                    <small>جام‌ها</small>
+                    <strong id="playerTrophies">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- رضایت هواداران -->
+
+        <section class="fan-card">
+
+            <div>
+
+                <span>
+                    ❤️ رضایت هواداران
+                </span>
+
+                <h2 id="fanRating">
+                    50%
+                </h2>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    id="fanProgress"
+                    class="progress-bar"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- منوی Career -->
+
+        <section class="career-menu">
+
+            <button
+                type="button"
+                onclick="window.location.href='match.html'"
+            >
+                🏟️ مسابقات
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='training.html'"
+            >
+                🏋️ تمرین
+            </button>
+            <button
+                type="button"
+                onclick="window.location.href='transfers.html'"
+            >
+                🔄 نقل‌وانتقالات
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='trophies.html'"
+            >
+                🏆 جام‌ها
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='news.html'"
+            >
+                📰 اخبار
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='contract.html'"
+            >
+                📋 قرارداد
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Career Football © 2026
+    </footer>
+
+</div>
+
+
+<script src="career.js"></script>
 
 </body>
 
