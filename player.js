@@ -1,95 +1,50 @@
-// ======================================
-// Career Football
-// Create Player System
-// ======================================
-
 const playerForm = document.getElementById("playerForm");
 
-playerForm.addEventListener("submit", function (event) {
+if (playerForm) {
+    playerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    event.preventDefault();
+        const get = id => document.getElementById(id)?.value.trim();
+        const player = {
+            name: get("playerName"),
+            position: get("playerPosition"),
+            preferredFoot: get("preferredFoot"),
+            age: Number(get("playerAge")),
+            nationality: get("playerNationality"),
+            startingClub: get("startingClub"),
+            overall: Number(get("playerOverall")) || 65,
+            value: Number(get("playerValue")) || 500000,
+            salary: Number(get("playerSalary")) || 10000,
+            goals: 0,
+            assists: 0,
+            appearances: 0,
+            trophies: 0,
+            fanRating: 50,
+            popularity: 50,
+            fitness: 90,
+            sharpness: 70,
+            fatigue: 10,
+            season: "2026/27",
+            attributes: {
+                pace: Number(get("playerOverall")) || 65,
+                shooting: Number(get("playerOverall")) || 65,
+                passing: Number(get("playerOverall")) || 65,
+                dribbling: Number(get("playerOverall")) || 65,
+                defending: Number(get("playerOverall")) || 65,
+                physical: Number(get("playerOverall")) || 65,
+                mental: Number(get("playerOverall")) || 65,
+                weakfoot: 50
+            }
+        };
 
-    // دریافت اطلاعات بازیکن
-    const player = {
+        if (!player.name || !player.position || !player.preferredFoot || !player.age || !player.nationality || !player.startingClub) {
+            alert("لطفاً تمام اطلاعات بازیکن را کامل کن.");
+            return;
+        }
 
-        name: document.getElementById("playerName").value.trim(),
-
-        position:
-            document.getElementById("playerPosition").value,
-
-        preferredFoot:
-            document.getElementById("preferredFoot").value,
-
-        age:
-            Number(document.getElementById("playerAge").value),
-
-        nationality:
-            document.getElementById("playerNationality").value.trim(),
-
-        startingClub:
-            document.getElementById("startingClub").value.trim(),
-
-        overall:
-            Number(document.getElementById("playerOverall").value),
-
-        value:
-            Number(document.getElementById("playerValue").value),
-
-        salary:
-            Number(document.getElementById("playerSalary").value),
-
-        // آمار اولیه
-        goals: 0,
-        assists: 0,
-        appearances: 0,
-
-        // جام‌ها
-        trophies: 0,
-
-        // رضایت هواداران
-        fanRating: 50,
-
-        // فصل
-        season: "2026/27"
-    };
-
-
-    // بررسی اطلاعات ضروری
-    if (
-        !player.name ||
-        !player.position ||
-        !player.preferredFoot ||
-        !player.age ||
-        !player.nationality ||
-        !player.startingClub
-    ) {
-
-        alert("لطفاً تمام اطلاعات بازیکن را کامل کن.");
-        return;
-    }
-
-
-    // ذخیره بازیکن در مرورگر
-    localStorage.setItem(
-        "careerPlayer",
-        JSON.stringify(player)
-    );
-
-
-    // ثبت شروع کریر
-    localStorage.setItem(
-        "careerStarted",
-        "true"
-    );
-
-
-    // پیام موفقیت
-    alert(
-        بازیکن ${player.name} با موفقیت ساخته شد! ⚽
-    );
-
-
-    // رفتن به داشبورد کریر
-    window.location.href = "career.html";
-
-});
+        localStorage.setItem("careerPlayer", JSON.stringify(player));
+        localStorage.setItem("careerStarted", "true");
+        alert(`بازیکن ${player.name} با موفقیت ساخته شد! ⚽`);
+        window.location.href = "career.html";
+    });
+}
