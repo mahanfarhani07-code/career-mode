@@ -1,0 +1,5 @@
+const KEY='careerPlayer';
+const player=JSON.parse(localStorage.getItem(KEY)||'null');
+const box=document.getElementById('contractInfo');
+if(!player){box.innerHTML='<div class="stat-card">ابتدا بازیکن بسازید.</div>';}else{player.contractYears=player.contractYears||3;player.salary=player.salary||10000;box.innerHTML=`<div class="stat-card"><span>🏟️</span><small>باشگاه</small><strong>${player.startingClub||'باشگاه آزاد'}</strong></div><div class="stat-card"><span>💵</span><small>حقوق هفتگی</small><strong>${Number(player.salary).toLocaleString()} €</strong></div><div class="stat-card"><span>📅</span><small>مدت قرارداد</small><strong>${player.contractYears} سال</strong></div><div class="stat-card"><span>💰</span><small>ارزش</small><strong>${Number(player.value||0).toLocaleString()} €</strong></div>`;localStorage.setItem(KEY,JSON.stringify(player));}
+function renewContract(){if(!player)return;player.contractYears=Math.min((player.contractYears||3)+2,5);player.salary=Math.round((player.salary||10000)*1.12);localStorage.setItem(KEY,JSON.stringify(player));alert(`قرارداد ${player.name} تمدید شد! حقوق جدید: ${player.salary.toLocaleString()} €`);location.reload();}
