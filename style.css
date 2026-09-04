@@ -1,12 +1,144 @@
-transition: 0.3s;
+max-width: 850px;
+
+    margin: auto;
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111821,
+            #0b1016
+        );
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.45);
 }
 
-.career-menu button:hover {
-    transform: translateY(-5px);
+.page-title {
 
-    background: #17212c;
+    text-align: center;
 
-    border-color: #087cff;
+    margin-bottom: 40px;
+}
+
+.page-title h1 {
+
+    font-size: 38px;
+
+    margin-bottom: 15px;
+
+    font-weight: 900;
+}
+
+.page-title p {
+
+    color: #8796a7;
+
+    line-height: 1.8;
+}
+
+/* =========================
+   FORM
+========================= */
+
+#playerForm {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.form-group label {
+
+    color: #dce5ee;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 16px;
+
+    border-radius: 12px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.09);
+
+    outline: none;
+
+    background: #080d13;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    transition: 0.25s;
+}
+
+.form-group input::placeholder {
+
+    color: #5f6d7c;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color:
+        rgba(0, 130, 255, 0.65);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 130, 255, 0.10);
+}
+
+.form-group select {
+
+    cursor: pointer;
+}
+
+.form-group select option {
+
+    background: #111821;
+
+    color: white;
+}
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+.create-button {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    margin-top: 10px;
 }
 
 /* =========================
@@ -14,6 +146,7 @@ transition: 0.3s;
 ========================= */
 
 footer {
+
     padding: 25px;
 
     text-align: center;
@@ -22,7 +155,8 @@ footer {
 
     background: #06080c;
 
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top:
+        1px solid rgba(255, 255, 255, 0.06);
 
     font-size: 13px;
 }
@@ -33,62 +167,64 @@ footer {
 
 @media (max-width: 900px) {
 
-    .features,
-    .stats-grid {
+    .features {
+
         grid-template-columns:
             repeat(2, 1fr);
     }
+}
 
-    .player-header {
-        grid-template-columns:
-            1fr;
+@media (max-width: 700px) {
 
-        text-align: center;
+    .create-player-container {
+
+        padding: 25px 18px;
     }
 
-    .player-avatar {
-        margin: auto;
+    #playerForm {
+
+        grid-template-columns: 1fr;
     }
 
-    .overall-box {
-        margin: auto;
+    .page-title h1 {
+
+        font-size: 30px;
     }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
 
     .header {
+
         padding: 0 20px;
     }
 
     .logo {
-        font-size: 17px;
+
+        font-size: 18px;
     }
 
     .season {
+
         font-size: 11px;
+
+        padding: 8px 12px;
     }
 
-    .features,
-    .stats-grid,
-    .career-menu,
-    .player-form {
+    .hero {
+
+        min-height: 430px;
+    }
+
+    .hero p {
+
+        font-size: 15px;
+    }
+
+    .features {
+
+        width: 90%;
+
         grid-template-columns: 1fr;
-    }
-
-    .player-form {
-        padding: 22px;
-    }
-
-    .page-title h1 {
-        font-size: 30px;
-    }
-
-    .player-info h1 {
-        font-size: 30px;
-    }
-
-    .form-actions {
-        grid-column: auto;
     }
 }
