@@ -15,11 +15,21 @@ function render(){
 function startTraining(type){
  const names={pace:"تمرین سرعت",shooting:"تمرین شوت",passing:"تمرین پاس",dribbling:"تمرین دریبل",defending:"تمرین دفاع",physical:"تمرین قدرت بدنی"};
  if(!names[type])return;
+ if(Number(player.fatigue||0)>=90){showResult("⚠️ بازیکن خسته است؛ ابتدا استراحت کن.");return;}
  player.attributes=player.attributes||{};const gain=2;player.attributes[type]=clamp((player.attributes[type]||player.overall||60)+gain);
  player.sharpness=clamp((player.sharpness||70)+gain);player.fatigue=clamp((player.fatigue||0)+5);if(player.fatigue>=80)player.fitness=clamp((player.fitness||90)-2);
  const vals=Object.values(player.attributes).map(Number).filter(Number.isFinite);if(vals.length)player.overall=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
  player.value=Math.round((player.value||500000)*(1.001));savePlayer(player);render();
- const box=document.getElementById("trainingResult");const msg=document.getElementById("trainingMessage");if(box)box.style.display="block";if(msg)msg.textContent=`✅ ${names[type]} انجام شد | ${player.name}: +${gain} مهارت`;
+ showResult(`✅ ${names[type]} انجام شد | ${player.name}: +${gain} مهارت`);
 }
+function restPlayer(){
+ player.fatigue=clamp((player.fatigue||0)-25);
+ player.fitness=clamp((player.fitness||0)+12);
+ player.sharpness=clamp((player.sharpness||0)-1);
+ savePlayer(player);render();showResult("🛌 استراحت انجام شد | انرژی و آمادگی بدنی بهتر شد.");
+}
+function showResult(message){const box=document.getElementById("trainingResult");const msg=document.getElementById("trainingMessage");if(box)box.style.display="block";if(msg)msg.textContent=message;}
 function trainPlayer(type){startTraining(type);}
-window.startTraining=startTraining;window.trainPlayer=trainPlayer;render();
+window.startTraining=startTraining;window.trainPlayer=trainPlayer;window.restPlayer=restPlayer;
+render();
+if(!document.getElementById("restTrainingBtn")){const wrap=document.querySelector(".form-actions");if(wrap){const b=document.createElement("button");b.id="restTrainingBtn";b.type="button";b.textContent="🛌 استراحت و ریکاوری";b.addEventListener("click",restPlayer);wrap.insertBefore(b,wrap.firstChild);}}
