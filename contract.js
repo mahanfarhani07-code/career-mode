@@ -7,18 +7,8 @@ if (!player) {
 } else {
     player.contractYears = Number(player.contractYears) || 3;
     player.salary = Number(player.salary) || 10000;
-
-    const currentClub = player.club || player.startingClub || "باشگاه آزاد";
-
-    if (box) {
-        box.innerHTML = `
-            <div class="stat-card"><span>🏟️</span><small>باشگاه فعلی</small><strong>${currentClub}</strong></div>
-            <div class="stat-card"><span>💵</span><small>حقوق هفتگی</small><strong>${player.salary.toLocaleString()} €</strong></div>
-            <div class="stat-card"><span>📅</span><small>مدت قرارداد</small><strong>${player.contractYears} سال</strong></div>
-            <div class="stat-card"><span>💰</span><small>ارزش بازیکن</small><strong>${Number(player.value || 0).toLocaleString()} €</strong></div>
-        `;
-    }
-
+    const club = player.club || player.startingClub || "باشگاه آزاد";
+    if (box) box.innerHTML = `<div class="stat-card"><span>🏟️</span><small>باشگاه فعلی</small><strong>${club}</strong></div><div class="stat-card"><span>💵</span><small>حقوق هفتگی</small><strong>${player.salary.toLocaleString()} €</strong></div><div class="stat-card"><span>📅</span><small>مدت قرارداد</small><strong>${player.contractYears} سال</strong></div><div class="stat-card"><span>💰</span><small>ارزش بازیکن</small><strong>${Number(player.value || 0).toLocaleString()} €</strong></div>`;
     localStorage.setItem(KEY, JSON.stringify(player));
 }
 
@@ -30,5 +20,4 @@ function renewContract() {
     alert(`قرارداد ${player.name} تمدید شد! حقوق جدید: ${player.salary.toLocaleString()} €`);
     location.reload();
 }
-
 window.renewContract = renewContract;
