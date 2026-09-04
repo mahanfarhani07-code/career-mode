@@ -3,6 +3,11 @@ const fallbackPlayer = { name: "بازیکن جدید", overall: 65, fitness: 90
 function loadPlayer(){ try{return JSON.parse(localStorage.getItem(KEY))||null;}catch{return null;} }
 function savePlayer(p){localStorage.setItem(KEY,JSON.stringify(p));}
 function clamp(v,min=0,max=100){return Math.max(min,Math.min(max,Number(v)||0));}
+function calculateOverall(){
+ const keys=["pace","shooting","passing","dribbling","defending","physical"];
+ const values=keys.map(k=>Number(player.attributes?.[k])).filter(Number.isFinite);
+ return values.length ? Math.round(values.reduce((a,b)=>a+b,0)/values.length) : 65;
+}
 let player=loadPlayer()||{...fallbackPlayer,attributes:{...fallbackPlayer.attributes}};
 function render(){
  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
@@ -16,16 +21,14 @@ function startTraining(type){
  const names={pace:"تمرین سرعت",shooting:"تمرین شوت",passing:"تمرین پاس",dribbling:"تمرین دریبل",defending:"تمرین دفاع",physical:"تمرین قدرت بدنی"};
  if(!names[type])return;
  if(Number(player.fatigue||0)>=90){showResult("⚠️ بازیکن خسته است؛ ابتدا استراحت کن.");return;}
- player.attributes=player.attributes||{};const gain=2;player.attributes[type]=clamp((player.attributes[type]||player.overall||60)+gain);
+ player.attributes=player.attributes||{};const gain=Number(player.fatigue||0)>=70?1:2;player.attributes[type]=clamp((player.attributes[type]||player.overall||60)+gain);
  player.sharpness=clamp((player.sharpness||70)+gain);player.fatigue=clamp((player.fatigue||0)+5);if(player.fatigue>=80)player.fitness=clamp((player.fitness||90)-2);
- const vals=Object.values(player.attributes).map(Number).filter(Number.isFinite);if(vals.length)player.overall=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
- player.value=Math.round((player.value||500000)*(1.001));savePlayer(player);render();
- showResult(`✅ ${names[type]} انجام شد | ${player.name}: +${gain} مهارت`);
+ player.overall=calculateOverall();
+ player.value=Math.round((player.value||500000)*1.002);savePlayer(player);render();
+ showResult(`✅ ${names[type]} انجام شد | ${player.name}: +${gain} مهارت | Overall: ${player.overall}`);
 }
 function restPlayer(){
- player.fatigue=clamp((player.fatigue||0)-25);
- player.fitness=clamp((player.fitness||0)+12);
- player.sharpness=clamp((player.sharpness||0)-1);
+ player.fatigue=clamp((player.fatigue||0)-25);player.fitness=clamp((player.fitness||0)+12);player.sharpness=clamp((player.sharpness||0)-1);
  savePlayer(player);render();showResult("🛌 استراحت انجام شد | انرژی و آمادگی بدنی بهتر شد.");
 }
 function showResult(message){const box=document.getElementById("trainingResult");const msg=document.getElementById("trainingMessage");if(box)box.style.display="block";if(msg)msg.textContent=message;}
