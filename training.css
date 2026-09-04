@@ -1,11 +1,8 @@
-border: 1px solid #24282e;
+/* ================================
+   Tablet
+   ================================ */
 
-    color: #aeb3b9;
-}
-
-/* Responsive */
-
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
 
     .training-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -16,16 +13,22 @@ border: 1px solid #24282e;
     }
 }
 
+/* ================================
+   Mobile
+   ================================ */
+
 @media (max-width: 600px) {
 
     .training-container {
-        padding: 15px;
+        padding: 18px 15px 35px;
     }
 
     .training-header {
-        flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+
+        flex-direction: column;
+
+        gap: 12px;
     }
 
     .training-header h1 {
@@ -37,10 +40,18 @@ border: 1px solid #24282e;
     }
 
     .player-status {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .status-card {
+        padding: 15px;
+    }
+
+    .status-card strong {
+        font-size: 23px;
     }
 
     .training-card {
-        min-height: 150px;
+        min-height: 125px;
     }
 }
