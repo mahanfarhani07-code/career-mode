@@ -1,124 +1,37 @@
-// ======================================
-// Career Football
-// Career Dashboard
-// ======================================
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    // دریافت اطلاعات بازیکن
-    const savedPlayer = localStorage.getItem("careerPlayer");
-
-    // اگر بازیکنی ذخیره نشده باشد
-    if (!savedPlayer) {
-        alert("هنوز بازیکنی ساخته نشده است.");
-        window.location.href = "create-player.html";
+    const raw = localStorage.getItem("careerPlayer");
+    if (!raw) {
+        window.location.href = "player.html";
         return;
     }
 
-    const player = JSON.parse(savedPlayer);
+    let player;
+    try { player = JSON.parse(raw); } catch { window.location.href = "player.html"; return; }
 
+    const positions = { GK: "دروازه‌بان", DEF: "مدافع", MID: "هافبک", ATT: "مهاجم" };
+    const feet = { right: "راست", left: "چپ", both: "هر دو پا" };
+    const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value ?? "—"; };
 
-    // -----------------------------
-    // تبدیل پست به نام فارسی
-    // -----------------------------
+    set("playerName", player.name);
+    set("playerOverall", player.overall);
+    set("playerDetails", `${positions[player.position] || player.position || "—"} • ${feet[player.preferredFoot] || player.preferredFoot || "—"} • ${player.nationality || "—"}`);
+    set("playerClub", player.startingClub || player.club || "آزاد");
+    set("playerAge", player.age);
+    set("playerValue", formatMoney(player.value));
+    set("playerSalary", formatMoney(player.salary));
+    set("playerGoals", player.goals || 0);
+    set("playerAssists", player.assists || 0);
+    set("playerAppearances", player.appearances || 0);
+    set("playerTrophies", player.trophies || 0);
 
-    const positions = {
-        GK: "دروازه‌بان",
-        DEF: "مدافع",
-        MID: "هافبک",
-        ATT: "مهاجم"
-    };
-
-
-    // -----------------------------
-    // تبدیل پای تخصصی
-    // -----------------------------
-
-    const feet = {
-        right: "راست",
-        left: "چپ",
-        both: "هر دو پا"
-    };
-
-
-    // -----------------------------
-    // نمایش اطلاعات بازیکن
-    // -----------------------------
-
-    document.getElementById("playerName").textContent =
-        player.name;
-
-    document.getElementById("playerOverall").textContent =
-        player.overall;
-
-    document.getElementById("playerDetails").textContent =
-        ${positions[player.position] || player.position} •  +
-        ${feet[player.preferredFoot] || player.preferredFoot} •  +
-        ${player.nationality};
-
-
-    // -----------------------------
-    // اطلاعات اصلی
-    // -----------------------------
-
-    document.getElementById("playerClub").textContent =
-        player.startingClub;
-
-    document.getElementById("playerAge").textContent =
-        player.age;
-
-
-    document.getElementById("playerValue").textContent =
-        formatMoney(player.value);
-
-
-    document.getElementById("playerSalary").textContent =
-        formatMoney(player.salary);
-
-
-    // -----------------------------
-    // آمار
-    // -----------------------------
-
-    document.getElementById("playerGoals").textContent =
-        player.goals;
-
-    document.getElementById("playerAssists").textContent =
-        player.assists;
-
-    document.getElementById("playerAppearances").textContent =
-        player.appearances;
-
-    document.getElementById("playerTrophies").textContent =
-        player.trophies;
-
-
-    // -----------------------------
-    // رضایت هواداران
-    // -----------------------------
-
-    const fanRating =
-        Math.max(0, Math.min(100, player.fanRating));
-
-    document.getElementById("fanRating").textContent =
-        ${fanRating}%;
-
-    document.getElementById("fanProgress").style.width =
-        ${fanRating}%;
-
+    const fanRating = Math.max(0, Math.min(100, Number(player.fanRating ?? player.popularity ?? 50)));
+    set("fanRating", `${fanRating}%`);
+    const progress = document.getElementById("fanProgress");
+    if (progress) progress.style.width = `${fanRating}%`;
 });
 
-
-// ======================================
-// نمایش پول با فرمت مناسب
-// ======================================
-
 function formatMoney(value) {
-
     return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "EUR",
-        maximumFractionDigits: 0
-    }).format(value);
-
+        style: "currency", currency: "EUR", maximumFractionDigits: 0
+    }).format(Number(value) || 0);
 }
