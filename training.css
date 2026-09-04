@@ -1,3 +1,313 @@
+/* =========================================
+   CAREER FOOTBALL - TRAINING PAGE
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+}
+
 body {
-    background: red !important;
+    margin: 0;
+    min-height: 100vh;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f4f7fa;
+    color: #18212b;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    min-height: 70px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #dce3e9;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+    color: #1d2730;
+}
+
+.season {
+    padding: 9px 15px;
+    border: 1px solid #d5dde4;
+    border-radius: 6px;
+    background: #f8fafc;
+    color: #4d5b67;
+    font-size: 13px;
+}
+
+/* Main */
+.career-page {
+    width: min(1050px, 92%);
+    margin: 0 auto;
+    padding: 38px 0 45px;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-title h1 {
+    margin: 12px 0 8px;
+    font-size: 34px;
+    color: #18212b;
+}
+
+.page-title p {
+    margin: 0;
+    color: #697782;
+    line-height: 1.8;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: #eaf3fb;
+    color: #2670a8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .4px;
+}
+
+/* Player header */
+.player-header {
+    display: grid;
+    grid-template-columns: 90px 1fr 100px;
+    gap: 20px;
+    align-items: center;
+    padding: 24px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border: 1px solid #dce3e9;
+    border-radius: 8px;
+}
+
+.player-avatar {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eef5fa;
+    border: 1px solid #cfdde7;
+    font-size: 34px;
+}
+
+.player-info h1 {
+    margin: 7px 0;
+    font-size: 24px;
+}
+
+.player-info p {
+    margin: 0;
+    color: #71808c;
+    font-size: 13px;
+}
+
+.overall-box {
+    text-align: center;
+    padding: 12px;
+    border-right: 3px solid #4386b8;
+    background: #f7fafc;
+}
+
+.overall-box span {
+    display: block;
+    color: #71808c;
+    font-size: 11px;
+}
+
+.overall-box strong {
+    display: block;
+    margin-top: 3px;
+    color: #286c9f;
+    font-size: 32px;
+}
+
+/* Energy */
+.fan-card {
+    padding: 22px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border: 1px solid #dce3e9;
+    border-radius: 8px;
+}
+
+.fan-card > div:first-child {
+    margin-bottom: 14px;
+}
+
+.fan-card span {
+    color: #52616d;
+    font-size: 14px;
+}
+
+.fan-card h2 {
+    margin: 7px 0 0;
+    color: #286c9f;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e8edf1;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    background: #4b88b7;
+    transition: width .3s ease;
+}
+
+/* Training section */
+.section {
+    margin-bottom: 18px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #dce3e9;
+    border-radius: 8px;
+}
+
+.section-title {
+    margin-bottom: 18px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 21px;
+    color: #202a33;
+}
+
+.career-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+}
+
+.career-menu button,
+.form-actions button {
+    min-height: 72px;
+    padding: 15px;
+    border: 1px solid #d2dce4;
+    border-radius: 6px;
+    background: #fbfcfd;
+    color: #26343f;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.career-menu button:hover,
+.form-actions button:hover {
+    background: #edf5fb;
+    border-color: #76a5c6;
+    transform: translateY(-2px);
+}
+
+.career-menu small {
+    display: inline-block;
+    margin-top: 7px;
+    color: #75838e;
+    font-size: 11px;
+}
+
+/* Result */
+#trainingResult {
+    position: relative;
+}
+
+#trainingMessage {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #286c9f;
+}
+
+/* Back button */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.form-actions button {
+    min-height: auto;
+    min-width: 210px;
+    background: #ffffff;
+}
+
+/* Footer */
+footer {
+    padding: 22px;
+    text-align: center;
+    background: #ffffff;
+    border-top: 1px solid #dce3e9;
+    color: #71808c;
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .career-menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .player-header {
+        grid-template-columns: 75px 1fr 85px;
+    }
+}
+
+@media (max-width: 560px) {
+    .header {
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .career-page {
+        width: 94%;
+        padding-top: 25px;
+    }
+
+    .page-title h1 {
+        font-size: 27px;
+    }
+
+    .player-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .player-avatar {
+        margin: auto;
+    }
+
+    .overall-box {
+        border-right: 0;
+        border-top: 3px solid #4386b8;
+    }
+
+    .career-menu {
+        grid-template-columns: 1fr;
+    }
 }
