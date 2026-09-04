@@ -1,181 +1,96 @@
-const players = {
-    player1: {
-        name: "Cristiano Ronaldo",
-        overall: 85,
-        fitness: 88,
-        sharpness: 75,
-        fatigue: 20
-    },
+const KEY = "careerPlayer";
 
-    player2: {
-        name: "Neymar Jr",
-        overall: 90,
-        fitness: 82,
-        sharpness: 80,
-        fatigue: 25
-    },
-
-    player3: {
-        name: "Kylian Mbappé",
-        overall: 91,
-        fitness: 94,
-        sharpness: 87,
-        fatigue: 10
-    },
-
-    player4: {
-        name: "Vinícius Jr",
-        overall: 89,
-        fitness: 91,
-        sharpness: 84,
-        fatigue: 12
+const fallbackPlayer = {
+    name: "بازیکن جدید",
+    overall: 65,
+    fitness: 90,
+    sharpness: 70,
+    fatigue: 10,
+    popularity: 50,
+    value: 500000,
+    attributes: {
+        pace: 65, shooting: 60, passing: 60, dribbling: 62,
+        defending: 45, physical: 60, mental: 55, weakfoot: 50
     }
 };
 
+function loadPlayer() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch { return null; }
+}
 
-// انتخاب بازیکن
+function savePlayer(player) {
+    localStorage.setItem(KEY, JSON.stringify(player));
+}
+
+function clamp(value, min = 0, max = 100) {
+    return Math.max(min, Math.min(max, Number(value) || 0));
+}
+
+let player = loadPlayer() || { ...fallbackPlayer, attributes: { ...fallbackPlayer.attributes } };
 
 const playerSelect = document.getElementById("playerSelect");
 
-playerSelect.addEventListener("change", function () {
-
-    const player = players[this.value];
-
-    if (!player) return;
-
-    updatePlayerStats(player);
-});
-
-
-// نمایش اطلاعات بازیکن
-
-function updatePlayerStats(player) {
-
-    document.getElementById("overall").textContent =
-        player.overall;
-
-    document.getElementById("fitness").textContent =
-        player.fitness;
-
-    document.getElementById("sharpness").textContent =
-        player.sharpness;
-
-    document.getElementById("fatigue").textContent =
-        player.fatigue;
+function render() {
+    const overall = document.getElementById("overall");
+    const fitness = document.getElementById("fitness");
+    const sharpness = document.getElementById("sharpness");
+    const fatigue = document.getElementById("fatigue");
+    if (overall) overall.textContent = Math.round(player.overall || 0);
+    if (fitness) fitness.textContent = Math.round(player.fitness || 0);
+    if (sharpness) sharpness.textContent = Math.round(player.sharpness || 0);
+    if (fatigue) fatigue.textContent = Math.round(player.fatigue || 0);
+    if (playerSelect && !playerSelect.value) {
+        const option = [...playerSelect.options].find(o => o.value === "careerPlayer");
+        if (option) option.textContent = player.name;
+    }
 }
 
-
-// انجام تمرین
+if (playerSelect) {
+    if (![...playerSelect.options].some(o => o.value === "careerPlayer")) {
+        const option = document.createElement("option");
+        option.value = "careerPlayer";
+        option.textContent = player.name;
+        playerSelect.appendChild(option);
+    }
+    playerSelect.value = "careerPlayer";
+    playerSelect.addEventListener("change", render);
+}
 
 function startTraining(type) {
+    const names = {
+        pace: "تمرین سرعت",
+        shooting: "تمرین شوت",
+        passing: "تمرین پاس",
+        dribbling: "تمرین دریبل",
+        defending: "تمرین دفاع",
+        physical: "تمرین قدرت بدنی",
+        mental: "تمرین ذهنی",
+        weakfoot: "تمرین پای ضعیف"
+    };
 
-    const selectedPlayer = playerSelect.value;
+    if (!names[type]) return;
 
-    if (!selectedPlayer) {
+    player.attributes = player.attributes || { ...fallbackPlayer.attributes };
+    const gain = type === "mental" || type === "weakfoot" ? 1 : 2;
+    const before = Number(player.attributes[type]) || 0;
+    player.attributes[type] = clamp(before + gain);
 
-        document.getElementById("trainingResult").textContent =
-            "⚠️ ابتدا یک بازیکن را انتخاب کنید.";
+    player.sharpness = clamp((player.sharpness || 0) + gain);
+    player.fatigue = clamp((player.fatigue || 0) + 5);
+    if (player.fatigue >= 80) player.fitness = clamp((player.fitness || 0) - 2);
 
-        return;
+    const values = Object.values(player.attributes).map(Number).filter(Number.isFinite);
+    if (values.length) player.overall = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+    player.value = Math.round((player.value || 500000) * (1 + gain / 1000));
+
+    savePlayer(player);
+    render();
+
+    const result = document.getElementById("trainingResult");
+    if (result) {
+        result.innerHTML = `<div class="training-success"><strong>✅ ${names[type]}</strong><br>${player.name} تمرین را با موفقیت انجام داد.<br>⭐ پیشرفت: +${gain}<br>😓 خستگی: +5</div>`;
     }
-
-    const player = players[selectedPlayer];
-
-    let trainingName = "";
-    let improvement = 0;
-
-
-    switch (type) {
-
-        case "pace":
-            trainingName = "تمرین سرعت";
-            improvement = 2;
-            break;
-
-        case "shooting":
-            trainingName = "تمرین شوت";
-            improvement = 2;
-            break;
-
-        case "passing":
-            trainingName = "تمرین پاس";
-            improvement = 2;
-            break;
-
-        case "dribbling":
-            trainingName = "تمرین دریبل";
-            improvement = 2;
-            break;
-
-        case "defending":
-            trainingName = "تمرین دفاع";
-            improvement = 2;
-            break;
-
-        case "physical":
-            trainingName = "تمرین قدرت بدنی";
-            improvement = 2;
-            break;
-
-        case "mental":
-            trainingName = "تمرین ذهنی";
-            improvement = 1;
-            break;
-
-        case "weakfoot":
-            trainingName = "تمرین پای ضعیف";
-            improvement = 1;
-            break;
-    }
-
-
-    // افزایش Sharpness
-
-    player.sharpness += improvement;
-
-    if (player.sharpness > 100) {
-        player.sharpness = 100;
-    }
-
-
-    // افزایش خستگی
-
-    player.fatigue += 5;
-
-    if (player.fatigue > 100) {
-        player.fatigue = 100;
-    }
-
-
-    // کاهش آمادگی در صورت خستگی زیاد
-
-    if (player.fatigue >= 80) {
-
-        player.fitness -= 2;
-
-        if (player.fitness < 0) {
-            player.fitness = 0;
-        }
-    }
-
-
-    // نمایش اطلاعات جدید
-
-    updatePlayerStats(player);
-
-
-    // نمایش نتیجه
-
-    document.getElementById("trainingResult").innerHTML =
-        
-        <div>
-            <strong>✅ ${trainingName}</strong>
-            <br>
-            ${player.name} تمرین را انجام داد.
-            <br>
-            ⭐ Sharpness: +${improvement}
-            <br>
-            😓 Fatigue: +5
-        </div>
-        ;
 }
+
+window.startTraining = startTraining;
+render();
