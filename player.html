@@ -1,111 +1,103 @@
-<label for="startingClub">
-                        🏟️ تیم شروع
-                    </label>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساخت بازیکن | Career Football</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <header class="header">
+        <div class="logo">⚽ CAREER FOOTBALL</div>
+        <div class="season">فصل 2026/27</div>
+    </header>
 
-                    <input
-                        type="text"
-                        id="startingClub"
-                        placeholder="مثلاً Persepolis"
-                        required
-                    >
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">CREATE PLAYER</div>
+                <h1>بازیکن خودت را بساز</h1>
+                <p>مشخصات بازیکن را وارد کن و کریر فوتبال خودت را شروع کن.</p>
+            </div>
+        </section>
 
+        <section class="card">
+            <form id="createPlayerForm">
+                <div class="form-group">
+                    <label for="playerName">👤 نام بازیکن</label>
+                    <input type="text" id="playerName" placeholder="مثلاً Mahan Farhani" required>
                 </div>
-
-
-                <!-- Overall -->
 
                 <div class="form-group">
-
-                    <label for="playerOverall">
-                        ⭐ Overall اولیه
-                    </label>
-
-                    <input
-                        type="number"
-                        id="playerOverall"
-                        min="40"
-                        max="99"
-                        value="65"
-                        required
-                    >
-
+                    <label for="position">⚽ پست</label>
+                    <select id="position" required>
+                        <option value="ST">ST - مهاجم</option>
+                        <option value="CF">CF - مهاجم سایه</option>
+                        <option value="LW">LW - وینگر چپ</option>
+                        <option value="RW">RW - وینگر راست</option>
+                        <option value="CAM">CAM - هافبک هجومی</option>
+                        <option value="CM">CM - هافبک</option>
+                        <option value="CDM">CDM - هافبک دفاعی</option>
+                        <option value="LM">LM - هافبک چپ</option>
+                        <option value="RM">RM - هافبک راست</option>
+                        <option value="CB">CB - مدافع میانی</option>
+                        <option value="LB">LB - دفاع چپ</option>
+                        <option value="RB">RB - دفاع راست</option>
+                        <option value="GK">GK - دروازه‌بان</option>
+                    </select>
                 </div>
-
-
-                <!-- ارزش بازیکن -->
 
                 <div class="form-group">
-
-                    <label for="playerValue">
-                        💰 ارزش بازیکن
-                    </label>
-
-                    <input
-                        type="number"
-                        id="playerValue"
-                        min="0"
-                        value="500000"
-                        required
-                    >
-
-                    <small>
-                        واحد: €
-                    </small>
-
+                    <label for="preferredFoot">🦶 پای تخصصی</label>
+                    <select id="preferredFoot" required>
+                        <option value="right">راست</option>
+                        <option value="left">چپ</option>
+                        <option value="both">هر دو پا</option>
+                    </select>
                 </div>
-
-
-                <!-- حقوق -->
 
                 <div class="form-group">
-
-                    <label for="playerSalary">
-                        💵 حقوق
-                    </label>
-
-                    <input
-                        type="number"
-                        id="playerSalary"
-                        min="0"
-                        value="10000"
-                        required
-                    >
-
-                    <small>
-                        حقوق هفتگی: €
-                    </small>
-
+                    <label for="age">🎂 سن</label>
+                    <input type="number" id="age" min="16" max="40" value="18" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="nationality">🌍 ملیت</label>
+                    <input type="text" id="nationality" placeholder="ایران" value="ایران" required>
+                </div>
 
-                <!-- دکمه -->
+                <div class="form-group">
+                    <label for="startingClub">🏟️ تیم شروع</label>
+                    <input type="text" id="startingClub" placeholder="مثلاً Persepolis" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerOverall">⭐ Overall اولیه</label>
+                    <input type="number" id="playerOverall" min="40" max="99" value="65" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerValue">💰 ارزش بازیکن</label>
+                    <input type="number" id="playerValue" min="0" value="500000" required>
+                    <small>واحد: €</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="playerSalary">💵 حقوق</label>
+                    <input type="number" id="playerSalary" min="0" value="10000" required>
+                    <small>حقوق هفتگی: €</small>
+                </div>
 
                 <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        id="createPlayerBtn"
-                    >
-                        🚀 ساخت بازیکن و شروع کریر
-                    </button>
-
+                    <button type="submit" id="createPlayerBtn">🚀 ساخت بازیکن و شروع کریر</button>
                 </div>
-
-
             </form>
+        </section>
+    </main>
 
-        </main>
-
-
-        <footer>
-            Career Football © 2026
-        </footer>
-
-    </div>
-
-
-    <script src="create-player.js"></script>
-
+    <footer>Career Football © 2026</footer>
+</div>
+<script src="create-player.js?v=3"></script>
 </body>
-
 </html>
